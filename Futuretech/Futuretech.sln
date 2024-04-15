@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futuretech.Domain", "Futuretech.Domain\Futuretech.Domain.csproj", "{FD5DFC22-C325-4787-AA2D-701C1C97CEA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Futuretech.Services.Airport", "Futuretech.Services.Airport\Futuretech.Services.Airport.csproj", "{B18CB687-D1FC-47E3-8453-583C09021954}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,7 +28,12 @@ Global
 		{FD5DFC22-C325-4787-AA2D-701C1C97CEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD5DFC22-C325-4787-AA2D-701C1C97CEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD5DFC22-C325-4787-AA2D-701C1C97CEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18CB687-D1FC-47E3-8453-583C09021954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18CB687-D1FC-47E3-8453-583C09021954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18CB687-D1FC-47E3-8453-583C09021954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18CB687-D1FC-47E3-8453-583C09021954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{B18CB687-D1FC-47E3-8453-583C09021954} = {C78D2FAF-3A7B-4C5E-9DC0-280AA86E7049}
 	EndGlobalSection
 EndGlobal
