@@ -13,8 +13,13 @@ public static class Extensions
 {
     public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddDaprClient();
+        builder.Services.AddControllers();
+        
         builder.ConfigureOpenTelemetry();
-
+        builder.Services.AddHttpLogging(o => { });
         builder.AddDefaultHealthChecks();
 
         builder.Services.AddServiceDiscovery();
@@ -27,6 +32,7 @@ public static class Extensions
             // Turn on service discovery by default
             http.UseServiceDiscovery();
         });
+        
 
         return builder;
     }
@@ -98,7 +104,25 @@ public static class Extensions
 
         return builder;
     }
+    
+    public static WebApplication UseServiceDefaults(this WebApplication app)
+    {
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            app.UseHttpLogging();
+        }
 
+        if (app.Environment.IsProduction())
+        {
+            app.UseHttpsRedirection();
+        }
+        
+        app.MapDefaultEndpoints();
+        
+        return app;
+    }
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
         // Uncomment the following line to enable the Prometheus endpoint (requires the OpenTelemetry.Exporter.Prometheus.AspNetCore package)
@@ -112,6 +136,18 @@ public static class Extensions
         {
             Predicate = r => r.Tags.Contains("live")
         });
+        
+        app.UseRouting();
+#pragma warning disable ASP0014
+        app.UseEndpoints(endpoints =>
+        {
+            // The subscribe handler is used by Dapr to subscribe to PubSub messages.
+            endpoints.MapSubscribeHandler();
+        });
+#pragma warning restore ASP0014
+        
+        // Controllers.
+        app.MapControllers();
 
         return app;
     }
