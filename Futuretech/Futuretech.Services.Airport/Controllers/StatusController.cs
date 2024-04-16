@@ -25,7 +25,7 @@ public class StatusController(DaprClient daprClient, ILogger<StatusController> l
         {
             logger.LogInformation("The airport has been opened ✈✈");
             await daprClient.SaveStateAsync("statestore", "status", true);
-            await daprClient.PublishEventAsync("pubsub", "airport-opened", new AirportOpenedEvent(DateTime.Now));
+            await daprClient.PublishEventAsync("pubsub", "airport-status-changed", new AirportStatusChangedEvent(true, DateTime.Now));
 
             return Ok();
         }
@@ -44,7 +44,7 @@ public class StatusController(DaprClient daprClient, ILogger<StatusController> l
         {
             logger.LogInformation("The airport has been closed");
             await daprClient.SaveStateAsync("statestore", "status", false);
-            await daprClient.PublishEventAsync("pubsub", "airport-closed", new AirportClosedEvent(DateTime.Now));
+            await daprClient.PublishEventAsync("pubsub", "airport-status-changed", new AirportStatusChangedEvent(false, DateTime.Now));
 
             return Ok();
         }
