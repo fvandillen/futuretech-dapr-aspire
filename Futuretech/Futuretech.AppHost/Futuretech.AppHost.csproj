@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Futuretech.Services.Airport\Futuretech.Services.Airport.csproj" />
+      <ProjectReference Include="..\Futuretech.Services.Flight\Futuretech.Services.Flight.csproj" />
       <ProjectReference Include="..\Futuretech.Services.RegulatoryInspector\Futuretech.Services.RegulatoryInspector.csproj" />
     </ItemGroup>
 

@@ -10,4 +10,8 @@ builder
     .AddProject<Projects.Futuretech_Services_RegulatoryInspector>("regulatory-inspector")
     .WithDaprSidecar();
 
+builder
+    .AddProject<Projects.Futuretech_Services_Flight>("flight")
+    .WithDaprSidecar();
+
 builder.Build().Run();
