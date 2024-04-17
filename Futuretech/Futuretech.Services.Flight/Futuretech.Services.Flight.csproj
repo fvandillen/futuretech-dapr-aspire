@@ -14,8 +14,4 @@
       <ProjectReference Include="..\Futuretech.ServiceDefaults\Futuretech.ServiceDefaults.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
 </Project>

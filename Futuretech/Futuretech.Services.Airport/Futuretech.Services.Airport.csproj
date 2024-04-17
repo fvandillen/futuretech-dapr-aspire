@@ -5,6 +5,9 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+        <ContainerRepository>airport-service-image</ContainerRepository>
+        <ContainerRegistry>futuretechweuacr.azurecr.io</ContainerRegistry>
     </PropertyGroup>
 
     <ItemGroup>

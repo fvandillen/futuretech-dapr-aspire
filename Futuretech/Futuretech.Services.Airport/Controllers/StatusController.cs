@@ -12,6 +12,7 @@ public class StatusController(DaprClient daprClient, ILogger<StatusController> l
     [HttpGet]
     public async Task<IActionResult> GetStatus()
     {
+        logger.LogInformation("Received status check");
         var status = await daprClient.GetStateAsync<bool>("statestore", "status");
         return Ok(status);
     }
