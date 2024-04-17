@@ -17,7 +17,6 @@ public class BigAirplaneController(DaprClient daprClient, RegulatoryInspectorCon
 		logger.LogInformation("Received flight scheduled event with {AircraftType} to {Destination}", @event.Data.AircraftType, @event.Data.Destination);
 		
 		var bigAirplaneCount = await daprClient.GetStateAsync<int>("statestore", "big-airplane-count");
-
 		bigAirplaneCount++;
 
 		if (bigAirplaneCount > 5)
