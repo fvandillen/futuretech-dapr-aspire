@@ -1,11 +1,10 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: sales-cosmosdb
+  name: statestore
 spec:
   type: state.azure.cosmosdb
   version: v1
-  initTimeout: 1m
   ignoreErrors: true
   metadata:
     - name: url
@@ -15,4 +14,4 @@ spec:
     - name: database
       value: dapr
     - name: collection
-      value: state
+      value: statestore

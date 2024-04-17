@@ -6,9 +6,9 @@ spec:
   type: bindings.cron
   version: v1
   metadata:
-  - name: schedule
-    value: "@every 20s"
-  - name: route
-    value: "/scheduler"
+    - name: schedule
+      value: "@every 20s"
+    - name: route
+      value: "/scheduler"
 scopes:
 - flight

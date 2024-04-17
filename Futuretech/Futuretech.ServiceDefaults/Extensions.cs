@@ -151,4 +151,20 @@ public static class Extensions
 
         return app;
     }
+    
+    public static IHostApplicationBuilder AddCustomMeters(this IHostApplicationBuilder builder, string[] meters)
+    {
+        // The AddOpenTelemetry() method is safe to be called multiple times.
+        builder.Services
+            .AddOpenTelemetry()
+            .WithMetrics(metrics =>
+            {
+                metrics
+                    .AddRuntimeInstrumentation()
+                    .AddMeter(meters);
+            });
+
+        return builder;
+    }
 }
+
