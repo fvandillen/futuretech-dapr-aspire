@@ -12,8 +12,13 @@ builder
         ResourcesPaths = ImmutableHashSet.Create(Directory.GetCurrentDirectory() + "/../dapr/components")
     });
 
+var sql = builder
+    .AddSqlServer("sql")
+    .AddDatabase("regulatory-inspector-sql");
+
 builder
     .AddProject<Projects.Futuretech_Services_RegulatoryInspector>("regulatory-inspector")
+    .WithReference(sql)
     .WithDaprSidecar(new DaprSidecarOptions()
     {
         ResourcesPaths = ImmutableHashSet.Create(Directory.GetCurrentDirectory() + "/../dapr/components")

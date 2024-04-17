@@ -1,13 +1,14 @@
 using Dapr;
 using Dapr.Client;
 using Futuretech.Domain.Events;
+using Futuretech.Services.RegulatoryInspector.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Futuretech.Services.RegulatoryInspector.Controllers;
 
 [ApiController]
 [Route("big-airplane")]
-public class BigAirplaneController(DaprClient daprClient, ILogger<BigAirplaneController> logger) : ControllerBase
+public class BigAirplaneController(DaprClient daprClient, RegulatoryInspectorContext db, ILogger<BigAirplaneController> logger) : ControllerBase
 {
 	[Topic("pubsub", "flight-scheduled", "event.data.aircraftType == \"Boeing 747\" || event.data.aircraftType == \"Airbus A380\"", 1)]
 	[HttpPost("scheduled")]
@@ -22,7 +23,12 @@ public class BigAirplaneController(DaprClient daprClient, ILogger<BigAirplaneCon
 		if (bigAirplaneCount > 5)
 		{
 			logger.LogWarning("Violation detected: More than 5 big airplanes scheduled");
-			// TODO: Add violation.
+			db.Violations.Add(new Violation()
+			{
+				DateTime = DateTime.Now, 
+				Description = "Violation detected: More than 5 big airplanes scheduled"
+			});
+			await db.SaveChangesAsync();
 		}
 		
 		await daprClient.SaveStateAsync("statestore", "big-airplane-count", bigAirplaneCount);
