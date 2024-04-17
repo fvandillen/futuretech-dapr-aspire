@@ -13,7 +13,7 @@ public class OpeningTimeController(RegulatoryInspectorContext db, ILogger<Openin
     [HttpPost("inspect")]
     public async Task<IActionResult> InspectAirportOpening(CloudEvent<AirportStatusChangedEvent> @event)
     {
-        if (@event.Data.TimeChanged.Hour is 11)
+        if (@event.Data.TimeChanged.Hour is > 22 or < 7)
         {
             logger.LogWarning("Airport violated the law: cannot be open between 22:00 and 07:00");
             db.Violations.Add(new Violation()
