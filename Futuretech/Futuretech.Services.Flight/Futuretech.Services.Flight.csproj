@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Futuretech.Domain\Futuretech.Domain.csproj" />
       <ProjectReference Include="..\Futuretech.ServiceDefaults\Futuretech.ServiceDefaults.csproj" />
     </ItemGroup>
 

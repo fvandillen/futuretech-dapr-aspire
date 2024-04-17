@@ -1,4 +1,5 @@
 using Dapr.Client;
+using Futuretech.Domain.Events;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Futuretech.Services.Flight.Controllers;
@@ -17,6 +18,16 @@ public class SchedulerController(DaprClient daprClient, ILogger<SchedulerControl
 		if (response)
 		{
 			logger.LogInformation("Airport is open. Scheduling flights");
+			
+			var aircraftTypes = new[] { "Boeing 747", "Airbus A380", "Boeing 737" };
+			var destinations = new[] { "London", "Paris", "New York", "Tokyo" };
+			var randomAircraftType = aircraftTypes[new Random().Next(aircraftTypes.Length)];
+			var randomDestination = destinations[new Random().Next(destinations.Length)];
+			
+			var flight = new FlightScheduledEvent(DateTime.UtcNow, randomAircraftType, randomDestination);
+			await daprClient.PublishEventAsync("pubsub", "flight-scheduled", flight);
+			
+			logger.LogInformation("Scheduled flight with {AirCraftType} to {Destination}", flight.AircraftType, flight.Destination);
 		}
 		else
 		{

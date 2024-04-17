@@ -7,7 +7,7 @@ spec:
   version: v1
   metadata:
   - name: schedule
-    value: "@every 1m"
+    value: "@every 20s"
   - name: route
     value: "/scheduler"
 scopes:

@@ -9,6 +9,7 @@ namespace Futuretech.Services.RegulatoryInspector.Controllers;
 public class OpeningTimeController(ILogger<OpeningTimeController> logger) : ControllerBase
 {
     [Topic("pubsub", "airport-status-changed", "event.data.newStatus == true", 1)]
+    [HttpPost("inspect")]
     public async Task<IActionResult> InspectAirportOpening(CloudEvent<AirportStatusChangedEvent> @event)
     {
         if (@event.Data.TimeChanged.Hour is > 18 or < 7)
